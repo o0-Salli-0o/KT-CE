@@ -6,7 +6,7 @@ public class Movement : MonoBehaviour
 {
 
     float speed = 10;
-    private int i = 0;
+    //private int i = 0;
 
     // Start is called before the first frame update
     void Start()
