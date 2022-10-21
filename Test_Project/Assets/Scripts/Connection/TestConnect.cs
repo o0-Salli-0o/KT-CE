@@ -10,7 +10,9 @@ public class TestConnect : MonoBehaviourPunCallbacks
     void Start()
     {
         print("Connecting to server...");
-        PhotonNetwork.GameVersion = "0.0.1";
+        // here the nickname was set locally and that will be set to the server
+        PhotonNetwork.NickName = MasterManager.GameSettings.NickName;
+        PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -23,6 +25,8 @@ public class TestConnect : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         print("Connected to server!");
+        // here we get the nickname that is on the server
+        print(PhotonNetwork.LocalPlayer.NickName);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
