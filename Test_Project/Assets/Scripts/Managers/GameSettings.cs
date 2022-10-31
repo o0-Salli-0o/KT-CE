@@ -8,20 +8,20 @@ public class GameSettings : ScriptableObject
 {
     [SerializeField]
     private string _gameVersion = "0.0.0";
-    [SerializeField]
-    private string _nickName = "Salli";
+    //[SerializeField]
+    //private string _nickName = "Salli";
 
     public string GameVersion
     {
         get { return _gameVersion; }
     }
 
-    public string NickName
+    /*public string NickName
     {
         get 
         {
             int value = Random.Range(0, 9999);
             return _nickName + value.ToString();
         }
-    }
+    }*/
 }
