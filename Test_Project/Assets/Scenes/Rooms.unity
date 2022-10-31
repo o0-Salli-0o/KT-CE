@@ -433,7 +433,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Create Room
+  m_Text: Create/Join Room
 --- !u!222 &642714538
 CanvasRenderer:
   m_ObjectHideFlags: 0
