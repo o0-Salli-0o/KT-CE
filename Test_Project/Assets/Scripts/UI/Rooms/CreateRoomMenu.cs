@@ -11,10 +11,22 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private Text roomName;
+
     [SerializeField]
     private Text playerName;
+
     [SerializeField]
     private byte maxPlayersPerRoom = 2;
+
+    //[Space(5)]
+    //public Text playerStatus;
+
+    private RoomsCanvases roomsCanvases;
+
+    public void FirstInitialize(RoomsCanvases canvases)
+    {
+        roomsCanvases = canvases;
+    }
 
     public void OnClick_CreateRoom()
     {
@@ -25,21 +37,24 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
 
         //JoinOrCreateRoom
         TypedLobby typedLobby = new TypedLobby(roomName.text, LobbyType.Default);
-        PhotonNetwork.LocalPlayer.NickName = this.playerName.text;
+        PhotonNetwork.NickName = this.playerName.text;
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = maxPlayersPerRoom;
 
         //print(this.playerName + " b");
-        PhotonNetwork.JoinOrCreateRoom(this.roomName.text, options, typedLobby);
+        PhotonNetwork.JoinOrCreateRoom(roomName.text, options, typedLobby);
 
     }
 
     public override void OnCreatedRoom()
     {
         Debug.Log("Created room successfully.", this);
-        //PhotonNetwork.LocalPlayer.NickName = this.playerName;
-        print("Player: " + PhotonNetwork.LocalPlayer.NickName);
-        print("Room: " + PhotonNetwork.CurrentRoom);
+        roomsCanvases.CurrentRoomCanvas.Show();
+
+        //print("Player: " + PhotonNetwork.LocalPlayer.NickName);
+        //print("Room: " + PhotonNetwork.CurrentRoom);
+
+        //roomsCanvases.CurrentRoomCanvas.Show();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -47,6 +62,7 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
         Debug.Log("Room creation failed: " + message, this);
     }
 
+    // TODO: delete
     public string PlayerName
     {
         get
