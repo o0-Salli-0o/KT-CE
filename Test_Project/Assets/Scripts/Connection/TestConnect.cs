@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class TestConnect : MonoBehaviourPunCallbacks
 {
-    //[Space(5)]
-    //private Text connectionStatus;
+    [Space(5)]
+    public Text connectionStatus;
 
     //public string playerName = "";
     //string roomName = "";
@@ -16,23 +16,23 @@ public class TestConnect : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         print("Connecting to server...");
         ConnectToPhoton();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public override void OnConnectedToMaster()
     {
+
+        connectionStatus.text = "Connected to Photon!";
+        connectionStatus.color = Color.green;
+
         print("Connected to server!");
         // here we get the nickname that is on the server
         //print(PhotonNetwork.LocalPlayer.NickName);
+
+        PhotonNetwork.JoinLobby();
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -42,7 +42,8 @@ public class TestConnect : MonoBehaviourPunCallbacks
 
     private void ConnectToPhoton()
     {
-        //connectionStatus.text = "Connecting...";
+        connectionStatus.text = "Connecting...";
+
         // here the nickname was set locally and that will be set to the server
         //PhotonNetwork.NickName = MasterManager.GameSettings.NickName;
         PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;

@@ -1,6 +1,8 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Manager/GameSettings")]
 
@@ -8,20 +10,20 @@ public class GameSettings : ScriptableObject
 {
     [SerializeField]
     private string _gameVersion = "0.0.0";
-    //[SerializeField]
-    //private string _nickName = "Salli";
+
+    [SerializeField]
+    private Text _nickName;
 
     public string GameVersion
     {
         get { return _gameVersion; }
     }
 
-    /*public string NickName
+    public string NickName
     {
         get 
         {
-            int value = Random.Range(0, 9999);
-            return _nickName + value.ToString();
+            return _nickName.text;
         }
-    }*/
+    }
 }
