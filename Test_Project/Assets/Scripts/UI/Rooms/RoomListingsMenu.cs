@@ -18,6 +18,7 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
     {
         foreach(RoomInfo info in roomList)
         {
+            // Removed from rooms list
             if (info.RemovedFromList)
             {
                 int index = listings.FindIndex(x => x.RoomInfo.Name == info.Name);
@@ -27,6 +28,7 @@ public class RoomListingsMenu : MonoBehaviourPunCallbacks
                     listings.RemoveAt(index);
                 }
             }
+            // Added to rooms list
             else
             {
                 RoomListing listing = (RoomListing)Instantiate(roomListing, content);
