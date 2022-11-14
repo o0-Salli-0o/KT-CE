@@ -1,5 +1,7 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Manager/GameSettings")]
@@ -17,7 +19,8 @@ public class GameSettings : ScriptableObject
     {
         get
         {
-            int value = Random.Range(1, 2);
+
+            int value = Random.Range(1000, 9999);
             return nickname + value.ToString();
         }
     }

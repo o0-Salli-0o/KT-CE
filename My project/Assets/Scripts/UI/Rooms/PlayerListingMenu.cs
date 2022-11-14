@@ -13,14 +13,36 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     private PlayerListing playerListing;
 
     private List<PlayerListing> listings = new List<PlayerListing>();
+    private RoomsCanvases roomsCanvases;
+    private GameSettings gameSettings;
 
-    private void Awake()
+    public override void OnEnable()
     {
+        base.OnEnable();
+        //SetReadyUp(false);
         GetCurrentRoomPlayers();
+    }
+
+    public override void OnDisable()
+    {
+        base.OnDisable();
+        for(int i = 0; i < listings.Count; i++)
+        {
+            Destroy(listings[i].gameObject);
+        }
+        listings.Clear();
+    }
+
+    public void FirstInitialize(RoomsCanvases canvases)
+    {
+        roomsCanvases = canvases;
     }
 
     private void GetCurrentRoomPlayers()
     {
+        if (!PhotonNetwork.IsConnected) return;
+        if (PhotonNetwork.CurrentRoom == null || PhotonNetwork.CurrentRoom.Players == null) return;
+
         foreach(KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
         {
             AddPlayerListing(playerInfo.Value);
@@ -29,11 +51,19 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
 
     private void AddPlayerListing(Player player)
     {
-        PlayerListing listing = Instantiate(playerListing, content);
-        if (listing != null)
+        int index = listings.FindIndex(x => x.Player == player);
+        if(index != -1)
         {
-            listing.SetPlayerInfo(player);
-            listings.Add(listing);
+            listings[index].SetPlayerInfo(player);
+        }
+        else
+        {
+            PlayerListing listing = Instantiate(playerListing, content);
+            if (listing != null)
+            {
+                listing.SetPlayerInfo(player);
+                listings.Add(listing);
+            }
         }
     }
 
@@ -50,5 +80,26 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
             Destroy(listings[index].gameObject);
             listings.RemoveAt(index);
         }
+    }
+
+    public void OnClick_StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+            PhotonNetwork.LoadLevel(1);
+        }
+    }
+
+    public bool ContainsPlayerName(string playerName)
+    {
+        foreach(PlayerListing playerListing in listings)
+        {
+            if (playerListing.Player.NickName.Equals(playerName)){
+                return true;
+            }
+        }
+        return false;
     }
 }

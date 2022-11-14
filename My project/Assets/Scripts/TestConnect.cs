@@ -16,6 +16,7 @@ public class TestConnect : MonoBehaviourPunCallbacks
         connectionStatus.text = "Connecting to server...";
 
         print("Connecting to server...");
+        PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.NickName = MasterManager.GameSettings.NickName;
         PhotonNetwork.GameVersion = MasterManager.GameSettings.GameVersion;
         PhotonNetwork.ConnectUsingSettings();
@@ -29,7 +30,8 @@ public class TestConnect : MonoBehaviourPunCallbacks
         print("Connected to server!");
         print(PhotonNetwork.LocalPlayer.NickName);
 
-        PhotonNetwork.JoinLobby();
+        if(!PhotonNetwork.InLobby)
+            PhotonNetwork.JoinLobby();
     }
 
 
