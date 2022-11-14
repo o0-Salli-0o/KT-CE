@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class RoomListing : MonoBehaviour
 {
-
     [SerializeField]
     private Text text;
 

@@ -19,11 +19,11 @@ public class GameSettings : ScriptableObject
         get { return _gameVersion; }
     }
 
-    public string NickName
+    /*public string NickName
     {
         get 
         {
             return _nickName.text;
         }
-    }
+    }*/
 }

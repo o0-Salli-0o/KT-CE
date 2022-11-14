@@ -51,8 +51,8 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
         Debug.Log("Created room successfully.", this);
         roomsCanvases.CurrentRoomCanvas.Show();
 
-        //print("Player: " + PhotonNetwork.LocalPlayer.NickName);
-        //print("Room: " + PhotonNetwork.CurrentRoom);
+        print("Player: " + PhotonNetwork.LocalPlayer.NickName);
+        print("Room: " + PhotonNetwork.CurrentRoom);
 
         //roomsCanvases.CurrentRoomCanvas.Show();
     }
@@ -63,11 +63,11 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     }
 
     // TODO: delete
-    public string PlayerName
+    /*public string PlayerName
     {
         get
         {
             return playerName.text;
         }
-    }
+    }*/
 }

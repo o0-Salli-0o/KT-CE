@@ -61,7 +61,7 @@ public class JoinGameMenu : MonoBehaviourPunCallbacks
         }
     }*/
 
-    public override void OnJoinedRoom()
+    /*public override void OnJoinedRoom()
     {
         if (PhotonNetwork.IsMasterClient)
         { 
@@ -76,5 +76,5 @@ public class JoinGameMenu : MonoBehaviourPunCallbacks
             playerTwo.text = PhotonNetwork.LocalPlayer.NickName;
             print("other in lobby");
         }
-    }
+    }*/
 }
