@@ -4,16 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    /*public float speed;
-    public float jump;
-
-    private float Move;
-
-    public Rigidbody2D rb;
-
-    public bool isJumping;*/
-
-
 
     public CharacterController2D characterController;
 
@@ -26,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
+    // Um zwischen den 2 Sprites abfragen zu können
     public SpriteRenderer spriteRenderer;
 
     public GameObject winner;
@@ -39,24 +30,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            isJumping = true;
-            animator.SetBool("IsJumping", true);
-        }
-
-        if (Input.GetButtonDown("Crouch"))
-        {
-            isCrouching = true;
-        }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            isCrouching = false;
-        }
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove)); */
-
         if (spriteRenderer.sprite.name == "BlobPlayer_Blue_0")
         {
             horizontalMove = Input.GetAxisRaw("Horizontal2") * runSpeed;
@@ -64,8 +37,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isJumping = true;
                 animator.SetBool("IsJumping", true);
-            }
-          
+            }         
         }
         else if (spriteRenderer.sprite.name == "BlobPlayer_Pink_0")
         {
@@ -75,27 +47,7 @@ public class PlayerMovement : MonoBehaviour
                 isJumping = true;
                 animator.SetBool("IsJumping", true);
             }
-
-            if (Input.GetButtonDown("Crouch"))
-            {   
-                isCrouching = true;
-            }
-            else if (Input.GetButtonUp("Crouch"))
-            {
-                isCrouching = false;
-            } 
         }
-        
-        /*Move = Input.GetAxis("Horizontal");
-
-        rb.velocity = new Vector2(speed * Move, rb.velocity.y);
-
-        animator.SetFloat("Speed", Mathf.Abs(Move * speed));
-
-        if (Input.GetButtonDown("Jump") && isJumping == false)
-        {
-            rb.AddForce(new Vector2(rb.velocity.x, jump));
-        }*/
     }
 
     public void OnLanding()
@@ -109,20 +61,4 @@ public class PlayerMovement : MonoBehaviour
         characterController.Move(horizontalMove * Time.fixedDeltaTime, isCrouching, isJumping);
         isJumping = false;
     }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            isJumping = false;
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            isJumping = true;
-        }
-    }*/
 }
