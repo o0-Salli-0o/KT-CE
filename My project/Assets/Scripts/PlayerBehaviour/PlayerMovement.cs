@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
 
+    public GameObject winner;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,14 +86,6 @@ public class PlayerMovement : MonoBehaviour
             } 
         }
         
-
-
-
-
-
-
-
-
         /*Move = Input.GetAxis("Horizontal");
 
         rb.velocity = new Vector2(speed * Move, rb.velocity.y);
