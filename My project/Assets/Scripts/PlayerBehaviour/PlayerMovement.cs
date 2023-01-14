@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isJumping;*/
 
 
+
     public CharacterController2D characterController;
 
     float horizontalMove = 0f;
@@ -25,17 +26,18 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator animator;
 
+    public SpriteRenderer spriteRenderer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+    spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        /*horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
         if (Input.GetButtonDown("Jump"))
         {
@@ -51,8 +53,44 @@ public class PlayerMovement : MonoBehaviour
         {
             isCrouching = false;
         }
+        animator.SetFloat("Speed", Mathf.Abs(horizontalMove)); */
 
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+        if (spriteRenderer.sprite.name == "BlobPlayer_Blue_0")
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal2") * runSpeed;
+            if (Input.GetKey(KeyCode.W))
+            {
+                isJumping = true;
+                animator.SetBool("IsJumping", true);
+            }
+          
+        }
+        else if (spriteRenderer.sprite.name == "BlobPlayer_Pink_0")
+        {
+            horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+            if (Input.GetButtonDown("Jump"))
+            {
+                isJumping = true;
+                animator.SetBool("IsJumping", true);
+            }
+
+            if (Input.GetButtonDown("Crouch"))
+            {   
+                isCrouching = true;
+            }
+            else if (Input.GetButtonUp("Crouch"))
+            {
+                isCrouching = false;
+            } 
+        }
+        
+
+
+
+
+
+
+
 
         /*Move = Input.GetAxis("Horizontal");
 
