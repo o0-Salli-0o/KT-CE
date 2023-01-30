@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Ziel : MonoBehaviour
 {
 
     public GameObject winner;
-    public Text winnerText;
+    public TextMeshProUGUI winnerText;
 
       
     // Start is called before the first frame update
     void Start()
     {
-        winnerText = GetComponent<Text>();
+        //winnerText = GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -28,7 +29,7 @@ public class Ziel : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             winner = collision.gameObject;
-            //winnerText.text = winner.name + " hat gewonnen!";
+            winnerText.text = winner.name + " hat gewonnen!";
             Debug.Log(winner.name + " hat gewonnen!");
             StartCoroutine(Restart());
         }
