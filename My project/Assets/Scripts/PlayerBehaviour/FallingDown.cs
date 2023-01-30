@@ -5,17 +5,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
-public class Ziel : MonoBehaviour
+public class FallingDown : MonoBehaviour
 {
 
-    public GameObject winner;
-    public TextMeshProUGUI winnerText;
+    public GameObject waterPlayer;
+    public TextMeshProUGUI loserText;
 
-      
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -28,9 +27,8 @@ public class Ziel : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            winner = collision.gameObject;
-            winnerText.text = winner.name + " hat gewonnen!";
-            Debug.Log(winner.name + " hat gewonnen!");
+            waterPlayer = collision.gameObject;
+            loserText.text = waterPlayer.name + " hat verloren";
             StartCoroutine(Restart());
         }
     }
@@ -41,5 +39,5 @@ public class Ziel : MonoBehaviour
         yield return new WaitForSeconds(3);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-}
 
+}
